@@ -25,16 +25,19 @@ You can run the code in the selected environment without issues.
 Install the library:
 
 * Google colab: pip install skyfield
-* Computer:  Windows/Mac/Linux Search -> Anconda pront -> pip install skyfield
+* Computer:  Windows/Mac/Linux Search -> Anconda pront -> pip install skyfield and pip install pyserial
 
 Test the library:
 ``` python
 #Library
 from skyfield.api import load, wgs84
+# Create a timescale and ask the current time.
+ts = load.timescale()
+t = ts.now()
 
-import serial
 
 # Load the JPL ephemeris DE421 (covers 1900-2050).
+
 planets = load('de421.bsp')
 earth, mars = planets['earth'], planets['mars']
 
@@ -124,9 +127,10 @@ else:
 azi=int(round(az.degrees,0))
 message=str(azi)+":"+str(alti)
  ```
-Run this code just one time
+Run this code just one time in your pc
 ``` python
-ser = serial.Serial('COM3', 9600)
+import serial
+ser = serial.Serial('COMX', 9600) -> COM communication before mentioned
  ```
  Run this section each time that you what to track another satellite.
 ``` python
@@ -200,3 +204,10 @@ if(Serial.available()>0){
 ```
 ### Electronic schematic:
 ![image](https://github.com/puldavid87/Satellites-Traking-Discosat/blob/main/discosat.png)
+
+### Pointer Location:
+Use the compass of your cellphone to determine the north and put the pointer in that direction before sending satellites coordinates to Arduino.
+
+
+![image](https://github.com/puldavid87/Satellites-Traking-Discosat/blob/main/satel.png)
+
